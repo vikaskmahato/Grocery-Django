@@ -1,0 +1,12 @@
+body {
+  background-image: url('/static/foods/images/back1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+  
+  
+}
+h1{
+  
+  color: rgb(5, 9, 39);
+}

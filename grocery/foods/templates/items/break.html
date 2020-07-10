@@ -1,0 +1,50 @@
+{%extends 'foods/base.html'%}
+{%load static%}
+{%block head%}{{block.super}}
+<title>Products</title>
+{%endblock head%}
+{%block content%}
+{% load cart %}
+<div class="row mx-auto">
+{% for i in products %}
+
+  <div class="card mx-auto" style="width:300px; height:300px ;">
+    <img class="card-img-top" src="{{i.image.url}}" alt="Card image" style="width:100%; height: 100%;">
+    <div class="card-body">
+      <h3 class="card-title">{{i.name}}</h3>
+      <p class="card-text">{{i.desc}}<br> Rs. {{i.price}}</p>
+      <div class="card-footer">
+        {% if i|quantity:request.session.cart %}
+        <div class="row">
+          <form action="" class="col-4"  method="POST" >
+            {% csrf_token %}
+            <input  hidden type="text" name="product" value="{{i.id}}">
+            <input type="submit" value="+" class="btn btn-block btn-primary">
+          </form>
+          <div class="text-center">
+            <pre>{{i|quantity:request.session.cart}}</pre>
+          </div>
+          <form action="" class="col-4"  method="POST" >
+            {% csrf_token %}
+            <input  hidden type="text" name="product" value="{{i.id}}">
+            <input  hidden type="text" name="minus" value="True">
+            <input type="submit" value="-" class="btn btn-block btn-primary">
+          </form>
+        </div>
+        {% else %}
+      <form action="" method="POST" class="btn-block">
+        {% csrf_token %}
+        <input  hidden type="text" name="product" value="{{i.id}}">
+        <input type="submit" class="btn btn-primary" value="Add To Cart">
+      </form>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+  {% endfor %}
+</div>
+  
+ 
+  {%endblock content%}

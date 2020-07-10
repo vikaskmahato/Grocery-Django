@@ -1,0 +1,28 @@
+{% extends 'foods/base.html'%}
+{% load static %}
+{%block head%}{{block.super}}
+<style>
+    body  {
+  background-image: url("/static/foods/images/backg.jpg");
+}
+</style>
+<title>Home</title>
+{%endblock head%}
+{%block content%}
+<div class="row mx-auto">
+{% for i in category%}
+         
+          <div class="card mx-auto" style="width:300px">
+            <img class="card-img-top" src="{{i.image.url}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">{{i.name}}</h4>
+              <p class="card-text">{{i.desc}} </p>
+              <a href="{% url 'categories' i.id %}" class="btn btn-primary">See Profile</a>
+            </div>
+          </div>
+        
+{% endfor %} 
+</div> 
+           
+    
+{%endblock content%}

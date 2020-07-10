@@ -1,0 +1,44 @@
+{% extends 'foods/base.html'%}
+{% load static %}
+{%block head%}{{block.super}}
+<title>Cart</title>
+{%endblock head%}
+{%block content%}
+{% load cart %}
+{% if empty%}
+<h3 class="text-center">Your cart is empty!</h3>
+{% else %}
+<table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Product Image</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in products%}
+      <tr>
+        <td><img style="width:80px;" src="{{i.image.url}}"></td>
+        <td>{{i.name}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i|quantity:request.session.cart}}</td>
+        <td>{{i|total:request.session.cart}}</td>
+      </tr>
+     {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+          <th colspan="4" class="text-right">Total Sum :- </th>
+          <th >{{products|sum:request.session.cart}}</th>      
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary float-center" href="{% url 'checkout'  %}"
+         role="button">Check Out</a>
+  </div>
+{% endif %}
+{%endblock content%}

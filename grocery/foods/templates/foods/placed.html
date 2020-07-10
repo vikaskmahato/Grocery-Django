@@ -1,0 +1,14 @@
+{% extends 'foods/base.html'%}
+{% load static %}
+{%block head%}{{block.super}}
+<title>Order Placed</title>
+{%endblock head%}
+{%block content%}
+<h3 class="text-center">Your order has been placed Successfully !</h3>
+<h2 class="text-center">You have to make payment for the products at the time of delivery.</h2>
+<h3 class="text-center">Continue shopping !<br></h3>
+<div class="text-center">
+    <a  class="btn btn-primary " href="{% url 'home' %}" role="button">Continue</a>
+</div>
+
+{% endblock content%}
